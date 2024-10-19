@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - WeBlog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background-color: #ffccdd;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .signup-container h1 {
+            margin-bottom: 30px;
+            color: #ff6799;
+        }
+        .signup-container h2 {
+            margin-bottom: 20px;
+            color: #ff6699;
+        }
+        .signup-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ff99bb;
+            border-radius: 5px;
+            background-color: #fff0f5;
+        }
+        .signup-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6699;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-container button:hover {
+            background-color: #ff3366;
+        }
+        .signup-container p {
+            margin-top: 20px;
+            color: #555;
+        }
+        .signup-container a {
+            color: #ff6699;
+            text-decoration: none;
+        }
+        .signup-container a:hover {
+            color: #ff3366;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h1>WeBlog</h1>
+    <h2>Sign Up</h2>
+    <form id="signupForm" onsubmit="handleSignUp(event)">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <p class="error-message" id="emailError">Please enter a valid email address.</p>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <p class="error-message" id="passwordError">Passwords do not match.</p>
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="signin.html">Sign In</a></p>
+</div>
+
+<script>
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function handleSignUp(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+
+        if (!validateEmail(email)) {
+            emailError.style.display = 'block';
+            return;
+        } else {
+            emailError.style.display = 'none';
+        }
+
+        if (password !== confirmPassword) {
+            passwordError.style.display = 'block';
+            return;
+        } else {
+            passwordError.style.display = 'none';
+        }
+
+        alert("Account created successfully! Please Sign In.");
+        window.location.href = "signin.html";
+    }
+</script>
+
+</body>
+</html>

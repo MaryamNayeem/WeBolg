@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeBlog.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative ; /*  dropdown positioning */
+            
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+            position: relative; /*  dropdown positioning */
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+        }
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+        .dropdown {
+            display: none; /* default hiding */
+            position: absolute;
+            top: 30px; 
+            right: 0;
+            background-color: #fff;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+        }
+        .dropdown a {
+            color: #333;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        .user-icon img {
+            cursor: pointer;
+            margin-left: 20px;
+            height:30px;
+            width: 30px;
+            border-radius: 50%;
+        }
+        .intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fcdce5; 
+            padding: 40px 20px;
+            text-align: left;
+        }
+        
+        .intro-content {
+            text-align: center;
+            max-width: 50%;  
+        }
+        
+        .intro h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .intro p {
+            font-size: 20px;
+            color: #555;
+        }
+        
+        .intro-image img {
+            width: 400px;  
+            height: 450px; 
+            border-radius: 8px;
+        }
+        
+        .search-bar {
+            margin-top: 20px;
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .categories {
+            background-color: #e7f3fe; 
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .categories h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .category-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .category {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-basis: calc(25% - 20px);
+            text-align: center;
+        }
+        .category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .category img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .category h4 {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .category p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        .recent-posts {
+            background-color: #f5f5f5; 
+            padding: 40px 0;
+            text-align: center;
+        }
+        .recent-posts h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .post-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .post {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin: 10px;
+            flex-basis: calc(30% - 20px); /* 3 clmn */
+            max-width: calc(30% - 20px); 
+        }
+        .post:hover {
+            transform: translateY(-10px);
+        }
+        .post img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .post h3 {
+            margin: 15px 0 10px;
+            font-size: 20px;
+            color: #000;
+        }
+        .post p {
+            font-size: 16px;
+            color: #555;
+        }
+        .load-more {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .load-more button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #222;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .load-more button:hover {
+            background-color: #FFD700;
+        }
+        .footer {
+            background-color: #222;
+            color: #fff;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer .footer-section {
+            width: 30%;
+        }
+        .footer .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .footer .footer-section ul {
+            list-style: none;
+        }
+        .footer .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        .footer .footer-section ul li a {
+            text-decoration: none;
+            color: #aaa;
+        }
+        .footer .footer-section ul li a:hover {
+            color: #FFD700;
+        }
+        .create-blog-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #FFD700; 
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 24px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000; 
+            transition: background-color 0.3s;
+        }
+        
+        .create-blog-icon:hover {
+            background-color: #222; 
+            color: #FFD700; 
+        }
+        
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* close btn position */
+}
+
+.logo img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+
+
+        
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>WeBlog</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="WeBlog.com.html#intro">Home</a></li>
+                <li><a href="WeBlog.com.html#recent-posts">Blog</a></li>
+                <li><a href="WeBlog.com.html#categories">Categories</a></li>
+                <li><a href="WeBlog.com.html#footer">About Us</a></li>
+                <li><a href="WeBlog.com.html#footer">Contact</a></li>
+                <li class="user-icon">
+                    <img src="https://i.pinimg.com/enabled/564x/f1/92/d6/f192d66e9dad3f99dcd07b47345b25be.jpg" alt="User Icon" onclick="toggleDropdown()">
+                    <div class="dropdown" id="userDropdown">
+                        <a href="WeBlog.com.html#">User Details</a>
+                        <a href="WeBlog.com.html#">My Blogs</a>
+                        <a href="WeBlog.com.html#">Settings</a>
+                        <a href="WeBlog.com.html#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="intro" id="intro">
+    <div class="intro-content">
+        <h2>Welcome to WeBlog!</h2>
+        <p>Your go-to source for the latest trends, tips, and insights in food, education, music, movies, DIY projects, and travel. Join us as we explore a world of creativity and inspiration!</p>
+        <p><strong>To continue, <a href="signin.html" style="color: #ff4d94; text-decoration: underline;">click here</a> to sign in, or <a href="signup.html" style="color: #ff4d94; text-decoration: underline;">click here</a> to sign up.</p>
+</div>
+    <div class="intro-image">
+        <img src="https://i.ibb.co/Z84gPzg/Weblog-1.png" alt="weblog">
+    </div>
+</section>
+
+<section class="categories" id="categories">
+    <h2>Explore Categories</h2>
+    <div class="category-list container">
+        <div class="category">
+            <img src="https://i.pinimg.com/564x/17/79/f3/1779f32d48e12e76279cd88ebeb3a6e4.jpg" alt="Food">
+            <h4>Food</h4>
+            <p>Delicious recipes and culinary journeys.</p>
+        </div>
+        <div class="category">
+            <img src="https://i.pinimg.com/474x/c7/e9/f4/c7e9f49819b95e5a729b1c009145267c.jpg" alt="Education">
+            <h4>Education</h4>
+            <p>Learning and educational tips for all ages.</p>
+        </div>
+        <div class="category">
+            <img src="https://i.pinimg.com/474x/1e/c5/a6/1ec5a69d52d485a5c9ba643b81c35b9d.jpg" alt="Music">
+            <h4>Music</h4>
+            <p>The latest trends and reviews in the music world.</p>
+        </div>
+        <div class="category">
+            <img src="https://i.pinimg.com/474x/cd/96/f2/cd96f263a346acbacb4201362592e869.jpg" alt="Movies">
+            <h4>Movies</h4>
+            <p>Reviews and recommendations for must-see films.</p>
+        </div>
+        <div class="category">
+            <img src="https://i.pinimg.com/474x/de/23/f8/de23f85dbf0da38a88e8ed3666bfb77d.jpg" alt="DIY">
+            <h4>DIY</h4>
+            <p>Creative projects and ideas for home improvement.</p>
+        </div>
+        <div class="category">
+            <img src="https://i.pinimg.com/474x/b8/4c/2e/b84c2ee55838a9df0c1b7f45cb1bbdd4.jpg" alt="Travel">
+            <h4>Travel</h4>
+            <p>Explore the world with our travel guides and tips.</p>
+        </div>
+    </div>
+</section>
+
+<section class="recent-posts" id="recent-posts">
+    <h2>Recent Posts</h2>
+    <div class="post-container">
+        <div class="post">
+            <img src="https://i.pinimg.com/474x/05/f8/cc/05f8cc68f2e1325661d4dc2aba21ce3b.jpg" alt="Food Post Image">
+            <h3>10 Best Italian Recipes to Try</h3>
+            <p>Explore the rich flavors of Italian cuisine with these must-try dishes.</p>
+        </div>
+        <div class="post">
+            <img src="https://i.pinimg.com/474x/39/40/fd/3940fd90aafb34f6d81855e5e3cdd276.jpg" alt="Education Post Image">
+            <h3>How to Excel in Online Learning</h3>
+            <p>Strategies for making the most out of online classes and courses.</p>
+        </div>
+        <div class="post">
+            <img src="https://i.pinimg.com/474x/8f/db/7e/8fdb7e1aa88fb06ff22a44cfaf35e579.jpg" alt="Music Post Image">
+            <h3>Top 10 Albums of 2024</h3>
+            <p>Check out the most popular albums this year across different genres.</p>
+        </div>
+        <div class="post">
+            <img src="https://i.pinimg.com/474x/e7/c9/b2/e7c9b243526feb237724693a7157ac13.jpg" alt="Movies Post Image">
+            <h3>5 Must-Watch Movies of the Year</h3>
+            <p>A roundup of the most exciting films released in 2024.</p>
+        </div>
+        <div class="post">
+            <img src="https://i.pinimg.com/474x/06/71/93/067193b7fd0f6bef782fbb0234fb7187.jpg" alt="DIY Post Image">
+            <h3>Easy DIY Projects for Home Decor</h3>
+            <p>Transform your living space with these simple DIY projects.</p>
+        </div>
+        <div class="post">
+            <img src="https://i.pinimg.com/enabled/736x/fa/95/98/fa95986f2c408098531ca7cc78aee3a4.jpg" alt="Travel Post Image">
+            <h3>Traveling on a Budget: Tips and Tricks</h3>
+            <p>Learn how to travel the world without breaking the bank.</p>
+        </div>
+    </div>
+    <div class="load-more">
+        <button>Load More Posts</button>
+    </div>
+</section>
+
+
+
+
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-section">
+            <h4>Categories</h4>
+            <ul>
+                <li><a href="WeBlog.com.html#categories">Food</a></li>
+                <li><a href="WeBlog.com.html#categories">Education</a></li>
+                <li><a href="WeBlog.com.html#categories">Music</a></li>
+                <li><a href="WeBlog.com.html#categories">Movies</a></li>
+                <li><a href="WeBlog.com.html#categories">DIY</a></li>
+                <li><a href="WeBlog.com.html#categories">Travel</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="WeBlog.com.html#footer">About Us</a></li>
+                <li><a href="WeBlog.com.html#footer">Careers</a></li>
+                <li><a href="WeBlog.com.html#footer">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Resources</h4>
+            <ul>
+                <li><a href="WeBlog.com.html#footer">Blog</a></li>
+                <li><a href="WeBlog.com.html#footer">Support</a></li>
+                <li><a href="WeBlog.com.html#footer">Help Center</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<div class="create-blog-icon" onclick="createBlog()">
+    +
+</div>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("userDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Close dropdown if clicked outside
+    window.onclick = function(event) {
+        if (!event.target.matches('.user-icon img')) {
+            const dropdown = document.getElementById("userDropdown");
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            }
+        }
+    }
+    function createBlog() {
+        window.location.href = "WeBlog_Create.post.html"; 
+    }
+
+// JavaScript to handle initial modal, login/signup forms
+window.onload = function() {
+    const initialModal = document.getElementById('initial-modal');
+    const mainModal = document.getElementById('modal');
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const modalTitle = document.getElementById('modal-title');
+
+    const loginBtn = document.getElementById('login-btn');
+    const signupBtn = document.getElementById('signup-btn');
+    const showSignup = document.getElementById('show-signup');
+    const showLogin = document.getElementById('show-login');
+    const closeModal = document.getElementById('close-modal');
+
+    // Show the initial modal on page load
+    initialModal.style.display = 'flex';
+
+    // Redirect to Login Form
+    loginBtn.addEventListener('click', function() {
+        initialModal.style.display = 'none';
+        mainModal.style.display = 'flex';
+        modalTitle.textContent = 'Login to your Account';
+        loginForm.style.display = 'flex';
+        signupForm.style.display = 'none';
+    });
+
+    // Redirect to Signup Form
+    signupBtn.addEventListener('click', function() {
+        initialModal.style.display = 'none';
+        mainModal.style.display = 'flex';
+        modalTitle.textContent = 'Create your Account';
+        signupForm.style.display = 'flex';
+        loginForm.style.display = 'none';
+    });
+
+    // Switch to Signup Form from Login
+    showSignup.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'flex';
+        modalTitle.textContent = 'Create your Account';
+    });
+
+    // Switch to Login Form from Signup
+    showLogin.addEventListener('click', function(e) {
+        e.preventDefault();
+        signupForm.style.display = 'none';
+        loginForm.style.display = 'flex';
+        modalTitle.textContent = 'Login to your Account';
+    });
+
+    // Close Modal Functionality
+    closeModal.addEventListener('click', function() {
+        mainModal.style.display = 'none';
+    });
+
+    // Close the initial modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target == initialModal) {
+            initialModal.style.display = 'none';
+        }
+    });
+};
+
+
+
+
+</script>
+
+
+
+</body></html>
