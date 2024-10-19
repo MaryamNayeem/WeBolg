@@ -1,0 +1,21 @@
+REQUIREMENTS OUR PROJECT "WEBLOGS" FOCUSES ON:
+1.User accounts
+2.User roles (admin, author, reader)
+3.Create and edit posts
+4.Categories for posts
+5.Tags for posts
+6.Comment section
+7.Mobile-friendly design
+8.Search bar
+9.Social media sharing
+10.Upload images and media
+11.likes features
+12.Analytics tracking
+13.Newsletter signup
+14.feed
+15.Theme customization
+16.Security measures
+17.Monetization options
+18.Easy navigation
+19.Schedule posts
+20.User feedback system
